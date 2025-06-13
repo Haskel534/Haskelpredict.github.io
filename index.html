@@ -2,58 +2,131 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>PREDICTIONBYHASKEL - Nike Style</title>
+  <title>PREDICTIONBYHASKEL - Gamer Edition</title>
   <style>
+    :root {
+      --primary: #6e48aa;
+      --secondary: #9d50bb;
+      --accent: #4776e6;
+      --neon: #00f2ff;
+      --dark: #0f0c29;
+      --light: #f4f4f9;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap');
+
     body {
-      font-family: 'Arial Black', sans-serif;
-      background: #ffebf3;
-      color: #7e57c2;
+      font-family: 'Rajdhani', sans-serif;
+      background: linear-gradient(135deg, var(--dark) 0%, #302b63 50%, var(--dark) 100%);
+      color: var(--light);
       text-align: center;
-      padding: 30px;
+      padding: 20px;
       margin: 0;
+      min-height: 100vh;
+      background-attachment: fixed;
+      overflow-x: hidden;
     }
 
     h1.logo {
-      font-size: 5rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4rem;
       font-weight: 900;
-      letter-spacing: -2px;
-      margin: 0 0 20px 0;
+      letter-spacing: 2px;
+      margin: 20px 0;
       text-transform: uppercase;
-      color: #7e57c2;
-      text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+      color: var(--neon);
+      text-shadow: 0 0 10px rgba(0, 242, 255, 0.7), 
+                  0 0 20px rgba(0, 242, 255, 0.5),
+                  0 0 30px rgba(0, 242, 255, 0.3);
+      position: relative;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px rgba(0, 242, 255, 0.7), 
+                         0 0 20px rgba(0, 242, 255, 0.5); }
+      to { text-shadow: 0 0 15px rgba(0, 242, 255, 0.9), 
+                       0 0 25px rgba(0, 242, 255, 0.7),
+                       0 0 35px rgba(0, 242, 255, 0.5); }
     }
 
     h1.logo::after {
       content: '✓';
-      color: #4fc3f7;
+      color: var(--accent);
       margin-left: 15px;
-      font-size: 5rem;
+      font-size: 4rem;
       vertical-align: middle;
+      text-shadow: 0 0 10px rgba(71, 118, 230, 0.7);
     }
 
     .nike-subtitle {
-      font-size: 1.2rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
       font-weight: 700;
       letter-spacing: 4px;
       margin-bottom: 40px;
       text-transform: uppercase;
-      color: #7e57c2;
+      color: var(--secondary);
+      text-shadow: 0 0 8px rgba(157, 80, 187, 0.6);
     }
 
     .hidden { display: none; }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: rgba(15, 12, 41, 0.8);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 0 30px rgba(110, 72, 170, 0.3),
+                  inset 0 0 20px rgba(0, 242, 255, 0.1);
+      border: 1px solid rgba(110, 72, 170, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
 
     input {
       padding: 18px 25px;
       margin: 15px 0;
       font-size: 1.1rem;
+      font-family: 'Rajdhani', sans-serif;
       border: none;
       border-radius: 50px;
       outline: none;
       width: 70%;
-      background: white;
-      color: #5e35b1;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      border: 2px solid #ba68c8;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--light);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2),
+                  inset 0 0 10px rgba(0, 242, 255, 0.1);
+      border: 1px solid var(--secondary);
+      transition: all 0.3s ease;
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    input:focus {
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 15px rgba(157, 80, 187, 0.5),
+                  inset 0 0 10px rgba(0, 242, 255, 0.2);
     }
 
     button {
@@ -61,21 +134,52 @@
       margin: 25px 0;
       font-size: 1.1rem;
       font-weight: 700;
-      background-color: #4fc3f7;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
       color: white;
       border: none;
       border-radius: 50px;
       cursor: pointer;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 2px;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(79, 195, 247, 0.4);
+      box-shadow: 0 4px 20px rgba(110, 72, 170, 0.5),
+                  0 0 10px rgba(0, 242, 255, 0.3);
+      position: relative;
+      overflow: hidden;
     }
 
     button:hover {
-      background-color: #3fb0e0;
+      background: linear-gradient(45deg, var(--secondary), var(--primary));
       transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(79, 195, 247, 0.6);
+      box-shadow: 0 6px 25px rgba(157, 80, 187, 0.7),
+                  0 0 15px rgba(0, 242, 255, 0.5);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    button::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 45%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 55%
+      );
+      transform: rotate(30deg);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { left: -50%; }
+      100% { left: 150%; }
     }
 
     .boules {
@@ -89,37 +193,67 @@
     .boule {
       width: 80px;
       height: 80px;
-      background: #f8bbd0;
+      background: linear-gradient(145deg, var(--primary), var(--secondary));
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: bold;
-      font-size: 1.5rem;
-      border: 3px solid #7e57c2;
-      color: #5e35b1;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      font-size: 1.8rem;
+      font-family: 'Orbitron', sans-serif;
+      border: 2px solid var(--neon);
+      color: white;
+      box-shadow: 0 0 20px rgba(110, 72, 170, 0.7),
+                  inset 0 0 10px rgba(0, 242, 255, 0.3);
       transition: all 0.3s;
+      position: relative;
+      animation: pulse 2s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); box-shadow: 0 0 20px rgba(110, 72, 170, 0.7); }
+      to { transform: scale(1.05); box-shadow: 0 0 30px rgba(110, 72, 170, 0.9); }
     }
 
     .boule-temps {
       width: 100px;
       height: 100px;
       flex-direction: column;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
     }
 
     .boule:hover {
       transform: scale(1.1);
-      background: #fce4ec;
+      box-shadow: 0 0 30px rgba(157, 80, 187, 0.9),
+                  inset 0 0 15px rgba(0, 242, 255, 0.5);
+      animation: none;
     }
 
     .multipliers {
       margin-top: 30px;
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: bold;
-      color: #4fc3f7;
-      letter-spacing: 2px;
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon);
+      letter-spacing: 3px;
+      text-shadow: 0 0 10px rgba(0, 242, 255, 0.7);
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .multipliers span {
+      position: relative;
+      padding: 0 15px;
+    }
+
+    .multipliers span::after {
+      content: '★';
+      position: absolute;
+      top: -15px;
+      right: -10px;
+      font-size: 1rem;
+      color: gold;
     }
 
     .warning {
@@ -128,13 +262,41 @@
       padding: 20px;
       font-size: 0.9rem;
       letter-spacing: 1px;
-      color: #7e57c2;
-      background: rgba(248, 187, 208, 0.3);
-      border: 2px dashed #ba68c8;
+      color: var(--light);
+      background: rgba(110, 72, 170, 0.2);
+      border: 1px dashed var(--neon);
       border-radius: 15px;
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .warning::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 242, 255, 0.1),
+        transparent
+      );
+      animation: warningShine 4s infinite;
+    }
+
+    @keyframes warningShine {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .warning strong {
+      color: var(--neon);
+      font-weight: 700;
     }
 
     /* Styles pour les onglets */
@@ -142,103 +304,254 @@
       display: flex;
       justify-content: center;
       margin: 30px 0;
+      position: relative;
+      z-index: 1;
     }
 
     .tab {
       padding: 15px 30px;
-      background: #ba68c8;
+      background: rgba(110, 72, 170, 0.3);
       color: white;
       border: none;
       cursor: pointer;
       font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
       font-size: 1rem;
       transition: all 0.3s;
       border-radius: 50px;
       margin: 0 10px;
+      letter-spacing: 1px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--secondary);
+    }
+
+    .tab::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 242, 255, 0.2),
+        transparent
+      );
+      transition: all 0.5s;
+    }
+
+    .tab:hover::before {
+      left: 100%;
     }
 
     .tab.active {
-      background: #4fc3f7;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
       transform: translateY(-3px);
-      box-shadow: 0 4px 15px rgba(79, 195, 247, 0.4);
+      box-shadow: 0 4px 20px rgba(110, 72, 170, 0.7),
+                  0 0 10px rgba(0, 242, 255, 0.3);
     }
 
     .tab-content {
       display: none;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .tab-content.active {
       display: block;
     }
+
+    /* Effets de particules */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: var(--neon);
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: float linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); opacity: 0; }
+      50% { opacity: 0.7; }
+      100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1.logo {
+        font-size: 2.5rem;
+      }
+      
+      h1.logo::after {
+        font-size: 2.5rem;
+      }
+      
+      .nike-subtitle {
+        font-size: 1rem;
+      }
+      
+      input, button {
+        width: 90%;
+      }
+      
+      .boules {
+        gap: 15px;
+      }
+      
+      .boule {
+        width: 60px;
+        height: 60px;
+        font-size: 1.3rem;
+      }
+      
+      .boule-temps {
+        width: 80px;
+        height: 80px;
+        font-size: 1.2rem;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <h1 class="logo">PREDICTION BY HASKEL</h1>
-  <div class="nike-subtitle">JUST DO IT</div>
-  
-  <div id="login">
-    <h2>ENTRER LE CODE D'ACCÈS</h2>
-    <input type="password" id="code" placeholder="CODE D'ACCÈS">
-    <br>
-    <button onclick="checkCode()">VALIDER</button>
-  </div>
+  <!-- Effets de particules -->
+  <div class="particles" id="particles"></div>
 
-  <div id="main" class="hidden">
-    <div class="tabs">
-      <button class="tab active" onclick="openTab('tours')">STRATÉGIE TOURS</button>
-      <button class="tab" onclick="openTab('temps')">STRATÉGIE TEMPS</button>
+  <div class="container">
+    <h1 class="logo">PREDICTION BY HASKEL</h1>
+    <div class="nike-subtitle">GAMER EDITION</div>
+    
+    <div id="login">
+      <h2>ENTRER LE CODE D'ACCÈS</h2>
+      <input type="password" id="code" placeholder="CODE D'ACCÈS">
+      <br>
+      <button onclick="checkCode()">VALIDER</button>
     </div>
 
-    <!-- Onglet Stratégie Tours -->
-    <div id="tours-tab" class="tab-content active">
-      <h2>MISER SUR LES TOURS ISSU DU RÉSULTAT DU CALCUL</h2>
-      <input type="number" id="tours" placeholder="NOMBRE DE TOURS">
-      <br>
-      <input type="number" step="0.01" id="cote" placeholder="CÔTE (EX: 7.00 - 99999999)">
-      <br>
-      <button onclick="calculerTours()">DONNER LES RÉSULTATS</button>
+    <div id="main" class="hidden">
+      <div class="tabs">
+        <button class="tab active" onclick="openTab('tours')">STRATÉGIE TOURS</button>
+        <button class="tab" onclick="openTab('temps')">STRATÉGIE TEMPS</button>
+      </div>
 
-      <div class="boules" id="boules"></div>
+      <!-- Onglet Stratégie Tours -->
+      <div id="tours-tab" class="tab-content active">
+        <h2>MISER SUR LES TOURS ISSU DU RÉSULTAT DU CALCUL</h2>
+        <input type="number" id="tours" placeholder="NOMBRE DE TOURS">
+        <br>
+        <input type="number" step="0.01" id="cote" placeholder="CÔTE (EX: 7.00 - 99999999)">
+        <br>
+        <button onclick="calculerTours()">DONNER LES RÉSULTATS</button>
 
-      <div class="multipliers">X5 &nbsp;&nbsp; X10+</div>
-    </div>
+        <div class="boules" id="boules"></div>
 
-    <!-- Onglet Stratégie Temps -->
-    <div id="temps-tab" class="tab-content">
-      <h2>STRATÉGIE TEMPS (HEURES:MINUTES)</h2>
-      <input type="number" id="heures" placeholder="Heures (0-23)" min="0" max="23">
-      <br>
-      <input type="number" id="minutes" placeholder="Minutes (0-59)" min="0" max="59">
-      <br>
-      <input type="number" step="0.01" id="cote-temps" placeholder="CÔTE (7.00 - 99999999)">
-      <br>
-      <button onclick="calculerTemps()">CALCULER LES HEURES</button>
+        <div class="multipliers">
+          <span>X5</span>
+          <span>X10+</span>
+        </div>
+      </div>
 
-      <div class="boules" id="temps-result"></div>
+      <!-- Onglet Stratégie Temps -->
+      <div id="temps-tab" class="tab-content">
+        <h2>STRATÉGIE TEMPS (HEURES:MINUTES)</h2>
+        <input type="number" id="heures" placeholder="Heures (0-23)" min="0" max="23">
+        <br>
+        <input type="number" id="minutes" placeholder="Minutes (0-59)" min="0" max="59">
+        <br>
+        <input type="number" step="0.01" id="cote-temps" placeholder="CÔTE (7.00 - 99999999)">
+        <br>
+        <button onclick="calculerTemps()">CALCULER LES HEURES</button>
 
-      <div class="multipliers">X5 &nbsp;&nbsp; X10+</div>
+        <div class="boules" id="temps-result"></div>
+
+        <div class="multipliers">
+          <span>X5</span>
+          <span>X10+</span>
+        </div>
+
+        <div class="warning">
+          <strong>STRATÉGIE TEMPS:</strong><br>
+          MISER 20 SEC AVANT LA PREDICTION DANS L'HEURE NORMAL <br>
+        </div>
+      </div>
 
       <div class="warning">
-        <strong>STRATÉGIE TEMPS:</strong><br>
-        MISER 20 SEC AVANT LA PREDICTION DANS L'HEURE NORMAL <br>
+        PROD BY HASINA<br>
+        NB: NE PAS MISER SI ON VOIT LA COTE -1.50 OU +7 AVANT LES RÉSULTATS
       </div>
-    </div>
-
-    <div class="warning">
-      PROD BY HASINA<br>
-      NB: NE PAS MISER SI ON VOIT LA COTE -1.50 OU +7 AVANT LES RÉSULTATS
     </div>
   </div>
 
   <script>
+    // Création des particules
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Position aléatoire
+        particle.style.left = Math.random() * 100 + 'vw';
+        particle.style.top = Math.random() * 100 + 'vh';
+        
+        // Taille aléatoire
+        const size = Math.random() * 3 + 1;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        
+        // Opacité aléatoire
+        particle.style.opacity = Math.random() * 0.5 + 0.1;
+        
+        // Durée d'animation aléatoire
+        const duration = Math.random() * 20 + 10;
+        particle.style.animationDuration = duration + 's';
+        
+        // Délai aléatoire
+        particle.style.animationDelay = Math.random() * -20 + 's';
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+    
+    // Initialisation des particules
+    createParticles();
+
     function checkCode() {
       const code = document.getElementById('code').value;
       if (code === "MONEY") {
         document.getElementById('login').classList.add('hidden');
         document.getElementById('main').classList.remove('hidden');
+        
+        // Effet sonore (optionnel)
+        const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3');
+        audio.volume = 0.3;
+        audio.play();
       } else {
         alert("CODE INCORRECT !");
+        // Effet sonore d'erreur (optionnel)
+        const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3');
+        audio.volume = 0.3;
+        audio.play();
       }
     }
 
@@ -251,6 +564,11 @@
       });
       document.getElementById(tabName + '-tab').classList.add('active');
       event.currentTarget.classList.add('active');
+      
+      // Effet sonore (optionnel)
+      const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3');
+      audio.volume = 0.2;
+      audio.play();
     }
 
     function calculerTours() {
@@ -281,6 +599,11 @@
         div.textContent = tours + add;
         boulesDiv.appendChild(div);
       });
+      
+      // Effet sonore (optionnel)
+      const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3');
+      audio.volume = 0.3;
+      audio.play();
     }
 
     function calculerTemps() {
@@ -333,6 +656,11 @@
         
         resultDiv.appendChild(div);
       });
+      
+      // Effet sonore (optionnel)
+      const audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3');
+      audio.volume = 0.3;
+      audio.play();
     }
   </script>
 
