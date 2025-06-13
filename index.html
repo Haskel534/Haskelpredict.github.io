@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>PREDICTIONBYHASKEL - Nike Style</title>
+  <style>
+    body {
+      font-family: 'Arial Black', sans-serif;
+      background: #ffebf3;
+      color: #7e57c2;
+      text-align: center;
+      padding: 30px;
+      margin: 0;
+    }
+
+    h1.logo {
+      font-size: 5rem;
+      font-weight: 900;
+      letter-spacing: -2px;
+      margin: 0 0 20px 0;
+      text-transform: uppercase;
+      color: #7e57c2;
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+    }
+
+    h1.logo::after {
+      content: '✓';
+      color: #4fc3f7;
+      margin-left: 15px;
+      font-size: 5rem;
+      vertical-align: middle;
+    }
+
+    .nike-subtitle {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 4px;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      color: #7e57c2;
+    }
+
+    .hidden { display: none; }
+
+    input {
+      padding: 18px 25px;
+      margin: 15px 0;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 50px;
+      outline: none;
+      width: 70%;
+      background: white;
+      color: #5e35b1;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border: 2px solid #ba68c8;
+    }
+
+    button {
+      padding: 18px 40px;
+      margin: 25px 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+      background-color: #4fc3f7;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(79, 195, 247, 0.4);
+    }
+
+    button:hover {
+      background-color: #3fb0e0;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(79, 195, 247, 0.6);
+    }
+
+    .boules {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+      margin: 40px 0;
+    }
+
+    .boule {
+      width: 80px;
+      height: 80px;
+      background: #f8bbd0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.5rem;
+      border: 3px solid #7e57c2;
+      color: #5e35b1;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+    }
+
+    .boule-temps {
+      width: 100px;
+      height: 100px;
+      flex-direction: column;
+      font-size: 1.2rem;
+    }
+
+    .boule:hover {
+      transform: scale(1.1);
+      background: #fce4ec;
+    }
+
+    .multipliers {
+      margin-top: 30px;
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #4fc3f7;
+      letter-spacing: 2px;
+    }
+
+    .warning {
+      font-style: italic;
+      margin-top: 50px;
+      padding: 20px;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      color: #7e57c2;
+      background: rgba(248, 187, 208, 0.3);
+      border: 2px dashed #ba68c8;
+      border-radius: 15px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Styles pour les onglets */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0;
+    }
+
+    .tab {
+      padding: 15px 30px;
+      background: #ba68c8;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: all 0.3s;
+      border-radius: 50px;
+      margin: 0 10px;
+    }
+
+    .tab.active {
+      background: #4fc3f7;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(79, 195, 247, 0.4);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="logo">PREDICTION BY HASKEL</h1>
+  <div class="nike-subtitle">JUST DO IT</div>
+  
+  <div id="login">
+    <h2>ENTRER LE CODE D'ACCÈS</h2>
+    <input type="password" id="code" placeholder="CODE D'ACCÈS">
+    <br>
+    <button onclick="checkCode()">VALIDER</button>
+  </div>
+
+  <div id="main" class="hidden">
+    <div class="tabs">
+      <button class="tab active" onclick="openTab('tours')">STRATÉGIE TOURS</button>
+      <button class="tab" onclick="openTab('temps')">STRATÉGIE TEMPS</button>
+    </div>
+
+    <!-- Onglet Stratégie Tours -->
+    <div id="tours-tab" class="tab-content active">
+      <h2>MISER SUR LES TOURS ISSU DU RÉSULTAT DU CALCUL</h2>
+      <input type="number" id="tours" placeholder="NOMBRE DE TOURS">
+      <br>
+      <input type="number" step="0.01" id="cote" placeholder="CÔTE (EX: 7.00 - 99999999)">
+      <br>
+      <button onclick="calculerTours()">DONNER LES RÉSULTATS</button>
+
+      <div class="boules" id="boules"></div>
+
+      <div class="multipliers">X5 &nbsp;&nbsp; X10+</div>
+    </div>
+
+    <!-- Onglet Stratégie Temps -->
+    <div id="temps-tab" class="tab-content">
+      <h2>STRATÉGIE TEMPS (HEURES:MINUTES)</h2>
+      <input type="number" id="heures" placeholder="Heures (0-23)" min="0" max="23">
+      <br>
+      <input type="number" id="minutes" placeholder="Minutes (0-59)" min="0" max="59">
+      <br>
+      <input type="number" step="0.01" id="cote-temps" placeholder="CÔTE (7.00 - 99999999)">
+      <br>
+      <button onclick="calculerTemps()">CALCULER LES HEURES</button>
+
+      <div class="boules" id="temps-result"></div>
+
+      <div class="multipliers">X5 &nbsp;&nbsp; X10+</div>
+
+      <div class="warning">
+        <strong>STRATÉGIE TEMPS:</strong><br>
+        MISER 20 SEC AVANT LA PREDICTION DANS L'HEURE NORMAL <br>
+      </div>
+    </div>
+
+    <div class="warning">
+      PROD BY HASINA<br>
+      NB: NE PAS MISER SI ON VOIT LA COTE -1.50 OU +7 AVANT LES RÉSULTATS
+    </div>
+  </div>
+
+  <script>
+    function checkCode() {
+      const code = document.getElementById('code').value;
+      if (code === "MONEY") {
+        document.getElementById('login').classList.add('hidden');
+        document.getElementById('main').classList.remove('hidden');
+      } else {
+        alert("CODE INCORRECT !");
+      }
+    }
+
+    function openTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.getElementById(tabName + '-tab').classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
+    function calculerTours() {
+      const tours = parseInt(document.getElementById('tours').value);
+      const cote = parseFloat(document.getElementById('cote').value);
+      const boulesDiv = document.getElementById('boules');
+      boulesDiv.innerHTML = "";
+
+      if (isNaN(tours) || isNaN(cote)) {
+        alert("VEUILLEZ REMPLIR TOUS LES CHAMPS AVEC DES VALEURS VALIDES.");
+        return;
+      }
+
+      let additions = [];
+
+      if (cote >= 7.00 && cote <= 9.99) {
+        additions = [8, 9, 10, 11, 12];
+      } else if (cote >= 10.00 && cote <= 99999999.99) {
+        additions = [18, 19, 20, 21, 22];
+      } else {
+        alert("CÔTE INVALIDE OU HORS PLAGE DÉFINIE.");
+        return;
+      }
+
+      additions.forEach(add => {
+        const div = document.createElement("div");
+        div.className = "boule";
+        div.textContent = tours + add;
+        boulesDiv.appendChild(div);
+      });
+    }
+
+    function calculerTemps() {
+      const heures = parseInt(document.getElementById('heures').value);
+      const minutes = parseInt(document.getElementById('minutes').value);
+      const cote = parseFloat(document.getElementById('cote-temps').value);
+      const resultDiv = document.getElementById('temps-result');
+      
+      if (isNaN(heures) || isNaN(minutes) || isNaN(cote)) {
+        alert("VEUILLEZ REMPLIR TOUS LES CHAMPS AVEC DES VALEURS VALIDES.");
+        return;
+      }
+
+      if (heures < 0 || heures > 23 || minutes < 0 || minutes > 59) {
+        alert("HEURES DOIVENT ÊTRE ENTRE 0-23 ET MINUTES ENTRE 0-59.");
+        return;
+      }
+
+      let additions = [];
+      
+      if (cote >= 7.00 && cote <= 9.99) {
+        additions = [3, 4]; // +3min et +4min (masqués)
+      } else if (cote >= 10.00) {
+        additions = [7, 8]; // +7min et +8min (masqués)
+      } else {
+        alert("CÔTE INVALIDE. DOIT ÊTRE ≥7.00");
+        return;
+      }
+
+      resultDiv.innerHTML = "";
+
+      additions.forEach(add => {
+        let totalMinutes = heures * 60 + minutes + add;
+        // Gestion du dépassement 24h
+        totalMinutes = totalMinutes % (24 * 60);
+        if (totalMinutes < 0) totalMinutes += 24 * 60;
+        
+        const newHeures = Math.floor(totalMinutes / 60);
+        const newMinutes = totalMinutes % 60;
+        
+        // Formatage à 2 chiffres
+        const formattedHeures = newHeures.toString().padStart(2, '0');
+        const formattedMinutes = newMinutes.toString().padStart(2, '0');
+        
+        const div = document.createElement("div");
+        div.className = "boule boule-temps";
+        div.innerHTML = `
+          <div>${formattedHeures}:${formattedMinutes}</div>
+        `;
+        
+        resultDiv.appendChild(div);
+      });
+    }
+  </script>
+
+</body>
+</html>
